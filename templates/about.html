@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}About — Zephyr{% endblock %}
+
+{% block content %}
+<div class="page about-page">
+    <section class="page-hero">
+        <h1 class="hero-title">About Zephyr</h1>
+        <p class="hero-sub">A clean, fast job board for remote tech roles</p>
+    </section>
+
+    <section class="about-content">
+        <div class="about-card">
+            <h2>What is Zephyr?</h2>
+            <p>
+                Zephyr is a curated job board focused exclusively on remote
+                technology roles. We believe great work happens everywhere —
+                not just in a handful of coastal cities. Our goal is to make
+                it simple to discover opportunities at companies that embrace
+                remote-first culture.
+            </p>
+        </div>
+
+        <div class="about-card">
+            <h2>Why Zephyr?</h2>
+            <p>
+                Most job boards bury remote filters behind signup walls, mix in
+                low-quality listings, or make you scroll past irrelevant results.
+                Zephyr puts powerful filters front and center: search by title,
+                company, tech stack, remote type, and salary range — all on one
+                page, with no accounts required.
+            </p>
+        </div>
+
+        <div class="about-card">
+            <h2>How it works</h2>
+            <ol class="about-steps">
+                <li><strong>Browse</strong> — Scroll remote tech jobs from 50+ companies.</li>
+                <li><strong>Filter</strong> — Narrow results by title, company, tech stack, remote type, or salary.</li>
+                <li><strong>Apply</strong> — Click through to the company's career page and submit your application.</li>
+            </ol>
+        </div>
+
+        <div class="about-card about-card--cta">
+            <h2>Ready to find your next role?</h2>
+            <a href="/" class="btn btn-primary btn-lg">Browse all jobs →</a>
+        </div>
+    </section>
+</div>
+{% endblock %}

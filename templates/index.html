@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+{% block title %}Zephyr — Remote Tech Jobs{% endblock %}
+
+{% block content %}
+<div class="page jobs-page">
+    <section class="page-hero">
+        <h1 class="hero-title">Remote Tech Jobs</h1>
+        <p class="hero-sub">Find your next role at the best remote-first companies</p>
+    </section>
+
+    <section class="filter-bar" id="filter-bar">
+        <form method="get" action="/" class="filter-form" id="filter-form">
+            <div class="filter-row">
+                <div class="filter-field">
+                    <label for="filter-title" class="filter-label">Title</label>
+                    <input
+                        type="text"
+                        id="filter-title"
+                        name="title"
+                        class="filter-input"
+                        placeholder="e.g. Frontend, DevOps…"
+                        value="{{ filters.title }}"
+                    >
+                </div>
+                <div class="filter-field">
+                    <label for="filter-company" class="filter-label">Company</label>
+                    <select id="filter-company" name="company" class="filter-input">
+                        <option value="">All companies</option>
+                        {% for c in companies %}
+                            <option value="{{ c }}" {% if filters.company == c %}selected{% endif %}>{{ c }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="filter-field">
+                    <label for="filter-tech" class="filter-label">Tech stack</label>
+                    <select id="filter-tech" name="tech_stack" class="filter-input">
+                        <option value="">Any technology</option>
+                        {% for t in tags_list %}
+                            <option value="{{ t }}" {% if filters.tech_stack == t %}selected{% endif %}>{{ t }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="filter-field">
+                    <label for="filter-remote" class="filter-label">Remote type</label>
+                    <select id="filter-remote" name="remote_type" class="filter-input">
+                        <option value="">Any type</option>
+                        <option value="remote" {% if filters.remote_type == 'remote' %}selected{% endif %}>Remote</option>
+                        <option value="hybrid" {% if filters.remote_type == 'hybrid' %}selected{% endif %}>Hybrid</option>
+                        <option value="on-site" {% if filters.remote_type == 'on-site' %}selected{% endif %}>On-site</option>
+                    </select>
+                </div>
+            </div>
+            <div class="filter-row filter-row-secondary">
+                <div class="filter-field">
+                    <label for="filter-salary-min" class="filter-label">Salary min ($)</label>
+                    <input
+                        type="number"
+                        id="filter-salary-min"
+                        name="salary_min"
+                        class="filter-input"
+                        placeholder="e.g. 80000"
+                        value="{{ filters.salary_min }}"
+                        min="0"
+                        step="10000"
+                    >
+                </div>
+                <div class="filter-field">
+                    <label for="filter-salary-max" class="filter-label">Salary max ($)</label>
+                    <input
+                        type="number"
+                        id="filter-salary-max"
+                        name="salary_max"
+                        class="filter-input"
+                        placeholder="e.g. 200000"
+                        value="{{ filters.salary_max }}"
+                        min="0"
+                        step="10000"
+                    >
+                </div>
+                <div class="filter-field filter-actions">
+                    <button type="submit" class="btn btn-primary">Apply Filters</button>
+                    <a href="/" class="btn btn-ghost">Clear All</a>
+                </div>
+            </div>
+        </form>
+    </section>
+
+    <section class="results-section">
+        <div class="results-header">
+            <p class="results-count">
+                {% if total == 0 %}
+                    No jobs match your filters. Try broadening your search.
+                {% elif total == 1 %}
+                    1 job found
+                {% else %}
+                    {{ total }} jobs found
+                {% endif %}
+            </p>
+        </div>
+
+        {% if jobs %}
+        <div class="job-grid">
+            {% for job in jobs %}
+            <article class="job-card">
+                <div class="job-card-header">
+                    <div class="company-avatar" aria-hidden="true">{{ job.company[0] }}</div>
+                    <div class="job-card-meta">
+                        <h2 class="job-card-title">
+                            <a href="/jobs/{{ job.id }}" class="job-card-link">{{ job.title }}</a>
+                        </h2>
+                        <p class="job-card-company">{{ job.company }}</p>
+                    </div>
+                    <span class="remote-badge remote-badge--{{ job.remote_type }}">{{ job.remote_type | capitalize }}</span>
+                </div>
+                {% if job.tags %}
+                <div class="job-card-tags">
+                    {% for tag in job.tags[:5] %}
+                        <span class="tag-pill">{{ tag }}</span>
+                    {% endfor %}
+                    {% if job.tags | length > 5 %}
+                        <span class="tag-pill tag-pill--more">+{{ job.tags | length - 5 }}</span>
+                    {% endif %}
+                </div>
+                {% endif %}
+                <div class="job-card-footer">
+                    {% if job.salary_min and job.salary_max %}
+                        <span class="salary">${{ "{:,.0f}".format(job.salary_min) }} – ${{ "{:,.0f}".format(job.salary_max) }}</span>
+                    {% elif job.salary_min %}
+                        <span class="salary">From ${{ "{:,.0f}".format(job.salary_min) }}</span>
+                    {% else %}
+                        <span class="salary salary--undisclosed">Salary undisclosed</span>
+                    {% endif %}
+                    <span class="posted-date">{{ job.posted_date.strftime('%b %d') }}</span>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+
+        {% if pages > 1 %}
+        <nav class="pagination" aria-label="Job listing pagination">
+            {% if page > 1 %}
+                <a href="{{ url_for('main.index', page=page-1, **filters) }}" class="pagination-link pagination-prev">← Prev</a>
+            {% endif %}
+            {% for p in range(1, pages + 1) %}
+                {% if p == page %}
+                    <span class="pagination-link pagination-current">{{ p }}</span>
+                {% elif p <= 3 or p > pages - 2 or (p >= page - 1 and p <= page + 1) %}
+                    <a href="{{ url_for('main.index', page=p, **filters) }}" class="pagination-link">{{ p }}</a>
+                {% elif p == 4 or p == pages - 2 %}
+                    <span class="pagination-link pagination-ellipsis">…</span>
+                {% endif %}
+            {% endfor %}
+            {% if page < pages %}
+                <a href="{{ url_for('main.index', page=page+1, **filters) }}" class="pagination-link pagination-next">Next →</a>
+            {% endif %}
+        </nav>
+        {% endif %}
+
+        {% else %}
+        <div class="empty-state">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.5" aria-hidden="true">
+                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <h2>No jobs found</h2>
+            <p>Try adjusting your filters or <a href="/">viewing all listings</a>.</p>
+        </div>
+        {% endif %}
+    </section>
+</div>
+{% endblock %}

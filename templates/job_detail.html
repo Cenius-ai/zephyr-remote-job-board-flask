@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}{{ job.title }} at {{ job.company }} — Zephyr{% endblock %}
+
+{% block content %}
+<div class="page job-detail-page">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/" class="breadcrumb-link">Jobs</a>
+        <span class="breadcrumb-sep">/</span>
+        <span class="breadcrumb-current">{{ job.company }}</span>
+    </nav>
+
+    <article class="job-detail">
+        <header class="job-detail-header">
+            <div class="detail-avatar" aria-hidden="true">{{ job.company[0] }}</div>
+            <div class="detail-meta">
+                <h1 class="detail-title">{{ job.title }}</h1>
+                <p class="detail-company">{{ job.company }}</p>
+                <div class="detail-badges">
+                    <span class="remote-badge remote-badge--{{ job.remote_type }}">{{ job.remote_type | capitalize }}</span>
+                    <span class="detail-date">Posted {{ job.posted_date.strftime('%B %d, %Y') }}</span>
+                </div>
+            </div>
+        </header>
+
+        {% if job.salary_min and job.salary_max %}
+        <div class="detail-salary">
+            <span class="salary-label">Salary range</span>
+            <span class="salary-value">${{ "{:,.0f}".format(job.salary_min) }} – ${{ "{:,.0f}".format(job.salary_max) }}</span>
+        </div>
+        {% elif job.salary_min %}
+        <div class="detail-salary">
+            <span class="salary-label">Starting salary</span>
+            <span class="salary-value">From ${{ "{:,.0f}".format(job.salary_min) }}</span>
+        </div>
+        {% endif %}
+
+        {% if job.tags %}
+        <div class="detail-tags">
+            <h3 class="detail-section-title">Tech stack</h3>
+            <div class="tag-list">
+                {% for tag in job.tags %}
+                    <span class="tag-pill">{{ tag }}</span>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="detail-description">
+            <h3 class="detail-section-title">Description</h3>
+            <div class="description-text">
+                {% for para in job.description.split('\n\n') %}
+                    <p>{{ para | replace('\n', '<br>' | safe) }}</p>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="detail-actions">
+            {% if job.apply_url %}
+                <a href="{{ job.apply_url }}" class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
+                    Apply for this role
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                </a>
+            {% else %}
+                <span class="btn btn-disabled btn-lg">No apply link available</span>
+            {% endif %}
+            <a href="/" class="btn btn-ghost">← Back to all jobs</a>
+        </div>
+    </article>
+</div>
+{% endblock %}
