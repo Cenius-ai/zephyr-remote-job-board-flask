@@ -101,7 +101,7 @@ _Full guide: [`USAGE.md`](USAGE.md)_
 
 ## Architecture
 
-Flask application, delivered as a complete, runnable project (41 files). Top-level layout: `instance/`, `routes/`, `services/`, `static/`, `templates/`. `install.sh` provisions dependencies and seeds demo data, so the app boots with something to show. Setup details live in [`INSTALL.md`](INSTALL.md).
+Flask application, delivered as a complete, runnable project (28 files). Top-level layout: `instance/`, `routes/`, `services/`, `static/`, `templates/`. `install.sh` provisions dependencies and seeds demo data, so the app boots with something to show. Setup details live in [`INSTALL.md`](INSTALL.md).
 
 ## FAQ
 
