@@ -1,6 +1,7 @@
 # Zephyr Remote Job Board — production-ready Flask search engine app starter
 
-**Zephyr Remote Job Board** is a free, open-source search engine app built with Flask. Build a Flask web application for browsing remote tech jobs with powerful filtering (by title, company, tech stack, remote type, salary range). Run it locally, deploy it as a self-hosted search engine app, or [remix it on cenius.ai](https://cenius.ai/marketplace/p/zephyr-remote-job-board?ref=gh&utm_campaign=zephyr-remote-job-board-flask) to make it your own — the whole application (code, design, seeded demo data) ships in this repository under the Apache-2.0 license.
+Need a self-hosted search engine app? **Zephyr Remote Job Board** is the open-source answer: a Flask project you can clone, run, and own. Build a Flask web application for browsing remote tech jobs with powerful filtering (by title, company, tech stack, remote type, salary range). Every Zephyr Remote Job Board line of code is here — no stripped demo, no paywalled features. Apache-2.0-licensed; [remix Zephyr Remote Job Board on cenius.ai](https://cenius.ai/marketplace/p/zephyr-remote-job-board?ref=gh&utm_campaign=zephyr-remote-job-board-flask) for a bespoke custom version.
+
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE) ![Stack](https://img.shields.io/badge/Stack-Flask-3b82f6) [![Built with cenius.ai](https://img.shields.io/badge/Built%20with-cenius.ai-8b5cf6)](https://cenius.ai)
 
@@ -16,19 +17,11 @@ _Local clone? See [Quick start](#quick-start) below. cenius.ai is the zero-setup
 
 ![Zephyr Remote Job Board demo — search engine app built with Flask](.github/media/hero_flagship.gif)
 
-▶ **[Watch the full demo video](https://cenius.ai/marketplace/p/zephyr-remote-job-board?ref=gh&utm_campaign=zephyr-remote-job-board-flask)** — the complete walkthrough, playing on the project's cenius.ai page · [MP4 file](.github/media/demo.mp4)
+📽 **[Watch the walkthrough](https://cenius.ai/marketplace/p/zephyr-remote-job-board?ref=gh&utm_campaign=zephyr-remote-job-board-flask)** — plays on cenius.ai · [MP4 file](.github/media/demo.mp4)
 
 ## Screenshots
 
 <img src=".github/media/shot-1.png" width="32%" alt="Zephyr Remote Job Board search engine app screenshot 1"/> <img src=".github/media/shot-2.png" width="32%" alt="Zephyr Remote Job Board search engine app screenshot 2"/> <img src=".github/media/shot-3.png" width="32%" alt="Zephyr Remote Job Board search engine app screenshot 3"/>
-
-## Features
-
-- Job listing with filters
-- Job detail page
-- Seeded demo data
-- Responsive and modern UI with light/dark mode
-- About page
 
 ## Quick start
 
@@ -99,9 +92,17 @@ curl http://localhost:5000/api/companies
 
 _Full guide: [`USAGE.md`](USAGE.md)_
 
+## Features
+
+- Job listing with filters
+- Job detail page
+- Seeded demo data
+- Responsive and modern UI with light/dark mode
+- About page
+
 ## Architecture
 
-Flask application, delivered as a complete, runnable project (28 files). Top-level layout: `instance/`, `routes/`, `services/`, `static/`, `templates/`. `install.sh` provisions dependencies and seeds demo data, so the app boots with something to show. Setup details live in [`INSTALL.md`](INSTALL.md).
+Everything runs out of the box: a Flask codebase (28 files). `install.sh` takes care of packages and initial data in a single pass; nothing else is required before launching. Top-level layout: `instance/`, `routes/`, `services/`, `static/`, `templates/`. Installation walkthrough: [`INSTALL.md`](INSTALL.md).
 
 ## FAQ
 
@@ -109,21 +110,21 @@ Flask application, delivered as a complete, runnable project (28 files). Top-lev
 
 Everything you need ships in this repo: clone it, run `./install.sh` to install dependencies and seed demo data, then follow [`INSTALL.md`](INSTALL.md) to start it. No external services required.
 
+### Is white-labeling Zephyr Remote Job Board allowed?
+
+Yes. The MIT license lets you remove the original branding and ship under your own name. For a guided approach, [remix it on cenius.ai](https://cenius.ai/marketplace/p/zephyr-remote-job-board?ref=gh&utm_campaign=zephyr-remote-job-board-flask): you get a fresh build with full rebrand and relicense rights.
+
 ### What powers Zephyr Remote Job Board under the hood?
 
 The app is built with Flask. What you see in this repo is the full production source, demo data included. Highlights include responsive and modern UI with light/dark mode.
 
-### Is Zephyr Remote Job Board free for commercial use?
-
-Yes. The code is Apache-2.0-licensed — use it, modify it, and ship it commercially. See [LICENSE](LICENSE).
-
-### Is white-labeling Zephyr Remote Job Board allowed?
-
-Absolutely. [Open it on cenius.ai](https://cenius.ai/marketplace/p/zephyr-remote-job-board?ref=gh&utm_campaign=zephyr-remote-job-board-flask) and remix it there — platform modifications come with full rebrand and relicense rights over your derivative, so the result is entirely yours.
-
 ### Is there a no-code way to modify Zephyr Remote Job Board?
 
 Open it on [cenius.ai](https://cenius.ai/marketplace/p/zephyr-remote-job-board?ref=gh&utm_campaign=zephyr-remote-job-board-flask) and describe the changes you want in plain English — the platform modifies the app and gives you a new, downloadable build.
+
+### Can I build a business on Zephyr Remote Job Board?
+
+Confirmed free for commercial use — MIT terms let you incorporate, resell, or ship it in any product. [LICENSE](LICENSE).
 
 ## License & rebranding
 
